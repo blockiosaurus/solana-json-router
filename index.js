@@ -19,6 +19,22 @@ function clusterApiUrl(cluster) {
   }
 }
 
+app.get('/data_uri/:data*', function (request, response) {
+  const data = request.params.data + request.params[0];
+
+  // Extract image data
+  const m = /^data:(.+?);base64,(.+)$/.exec(data)
+  if (!m) throw new Error(`Not a base64 image [${data}]`)
+  const [_, content_type, file_base64] = m
+  const file = Buffer.from(file_base64, 'base64')
+
+  response.writeHead(200, {
+    'Content-Type': content_type,
+    'Content-Length': file.length
+  });
+  response.end(file);
+})
+
 app.get('/:network/:address', function (request, response) {
   const network = request.params.network;
   const address = request.params.address;
