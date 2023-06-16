@@ -7,8 +7,9 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "express": "^4.0.0",
-    "ejs": "~1.0.0"
+    "@solana/web3.js": "^1.77.3",
+    "ejs": "~1.0.0",
+    "express": "^4.0.0"
   },
   "engines": {
     "node": "0.10.x",
